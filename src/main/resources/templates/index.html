@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Patient Resource</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a class="page-scroll" href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#patient">Patient Info</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#public">Public Info</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Intro Section -->
+<section id="intro" class="intro-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--<h1>Scrolling Nav</h1>-->
+                <!--<br />-->
+                <div class="jumbotron">
+                    <h1>Client</h1>
+                    <h2>Authorization Code: <span th:text="${authCode}" id="auth-code"></span></h2>
+                    <h2>Access Token: <span th:text="${token}" id="token"></span></h2>
+                    <br />
+                    <a id="button-getAuthCode" class="btn btn-primary" th:href="@{/getAuthCode}">Get Auth Code</a>
+                    <a id="button-getToken" class="btn btn-primary" th:href="@{/getToken}">Get Access Token</a>
+                    <a id="button-getResource" class="btn btn-primary" th:href="@{/getResource}">Get Patient Resource</a>
+                </div>
+                <br />
+                <!--<p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>, and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding ID on the page.</p>-->
+                <a class="btn btn-default page-scroll" href="#patient">Click Me to Scroll Down!</a>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<!-- Patient Info Section -->
+<section id="patient" class="patient-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Patient Info</h1>
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>ID</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Medical Order</th>
+                        <th>Dosage</th>
+                    </tr>
+                    <tr data-th-each="patient : ${patientList}">
+                        <td data-th-text="${patient.patientId}">...</td>
+                        <td data-th-text="${patient.firstName}">...</td>
+                        <td data-th-text="${patient.lastName}">...</td>
+                        <td data-th-text="${patient.gender}">...</td>
+                        <td data-th-text="${patient.status}">...</td>
+                        <td data-th-text="${patient.medicalOrder}">...</td>
+                        <td data-th-text="${patient.dosage}">...</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Public Info Section -->
+<section id="public" class="public-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron">
+                    <h1>Public Info</h1>
+                    <p>Public Info: <span th:text="${sentence}" id="sentence"></span></p>
+                    <a id="button-getPublicResource" class="btn btn-primary" th:href="@{/getPublicResource}">Get Public Resource</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="common/header :: body-bottom-scripts" />
+
+</body>
+</html>
